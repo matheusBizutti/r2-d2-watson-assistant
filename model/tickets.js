@@ -7,6 +7,7 @@ const Schema = mongoose.Schema;
 // - 2 = closed
 
 const TicketsSchema = new Schema({
+  email: { type: String, required: true, unique: false, lowercase: true },
   name: { type: String, required: true, unique: false, lowercase: true },
   problem_description: { type: String, required: true },
   date: { type: Date, default: Date.now },
