@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const cors = require('cors')
 
 const config = require('./config/config');
 const indexRoutes = require('./routes/index');
@@ -27,6 +28,8 @@ mongoose.connection.on('connected', () => {
   console.log('Application connected in database.')
 });
 
+// - CORS
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static('./public'));

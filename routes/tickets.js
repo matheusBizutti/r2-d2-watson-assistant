@@ -27,9 +27,9 @@ router.get('/detail/:code', auth, async (req, res) => {
 });
 
 router.post('/create', auth, async (req, res) => {
-  const { name, problem_description } = req.body;
+  const { name, problem_description, email } = req.body;
 
-  if(!name || !problem_description) return res.send({ error: 'Invalid data in the body.'});
+  if(!name || !problem_description || !email) return res.send({ error: 'Invalid data in the body.'});
 
   try {
     const ticket = await tickets.create(req.body);

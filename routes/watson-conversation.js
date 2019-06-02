@@ -20,10 +20,8 @@ router.post('/conversation/', (req, res) => {
   assistant.message(params, (err, response) => {
     if (err) {
       console.error(err);
-      res.status(500).json(err);
+      res.status(500).send(err);
     } else {
-      console.log('RESPONSE: ', response.output.text[1]);
-
       res.json(response);
     }
   });

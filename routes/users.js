@@ -8,8 +8,8 @@ const jwt = require('jsonwebtoken');
 
 const config = require('../config/config');
 
-const createUserToken = (userID) => {
-  return jwt.sign({id: userID}, config.jwt_pass, {expiresIn: config.jwt_expires_in});
+const createUserToken = (user) => {
+  return jwt.sign({id: user.id, user}, config.jwt_pass, {expiresIn: config.jwt_expires_in});
 }
 
 router.get('/', auth, async (req, res) => {
@@ -60,7 +60,7 @@ router.post('/create', async (req, res) => {
     if (await users.findOne({email})) return res.send ({error: 'User exists in database'});
 
     const user = await users.create(req.body);
-    return res.status(201).send({user, token: createUserToken(user.id)})
+    return res.status(201).send({user})
   } catch (err) {
     return res.status(500).send({error: 'Error in create user.'});
   }
@@ -82,7 +82,7 @@ router.post('/auth', async (req, res) => {
 
     if (!pass_ok) return res.status(401).send({error: 'Invalid password.'});
 
-    return res.status(201).send({user, token: createUserToken(user.id)})
+    return res.status(201).send({user, token: createUserToken(user)})
   } catch (err) {
     return res.send({error: err}); 
   }
