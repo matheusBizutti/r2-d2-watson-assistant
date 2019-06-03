@@ -34,7 +34,7 @@ router.post('/create', auth, async (req, res) => {
   try {
     const ticket = await tickets.create(req.body);
 
-    return res.status(201).send({message: `Your ticket code is: ${ticket['id']}`});
+    return res.status(201).send({message: `${ticket['id']}`});
   } catch (error) {
     return res.status(500).send({message: 'Error in create ticket.', error});
   }
