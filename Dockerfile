@@ -1,4 +1,4 @@
-ARG  NODE_VERSION=alpine
+ARG  NODE_VERSION=10.15.3
 FROM node:${NODE_VERSION}
 
 # install dependencies
